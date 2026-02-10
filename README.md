@@ -667,6 +667,18 @@ For more details on remote debugging, see the [Chrome DevTools documentation](ht
 
 Please consult [these instructions](./docs/debugging-android.md).
 
+## Skill Docs (Fork)
+
+This fork includes detailed skill documentation for AI assistants in
+[`skills/chrome-devtools/`](./skills/chrome-devtools/):
+
+| Doc | Description |
+|-----|-------------|
+| [SKILL.md](./skills/chrome-devtools/SKILL.md) | Main overview -- capabilities, workflow patterns, CLI reference |
+| [reference.md](./skills/chrome-devtools/reference.md) | Quick tool reference for all 30 tools by category |
+| [network-and-console-breakdown.md](./skills/chrome-devtools/network-and-console-breakdown.md) | Deep dive on collectors, formatters, and data flow |
+| [network-for-scraping-discovery.md](./skills/chrome-devtools/network-for-scraping-discovery.md) | Network-first API discovery and scraping guide |
+
 ## Known limitations
 
 ### Operating system sandboxes
