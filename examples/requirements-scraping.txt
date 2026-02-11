@@ -1,0 +1,4 @@
+# For examples/overtime_ag_scraper.py
+# pip install -r requirements-scraping.txt && playwright install chromium
+playwright>=1.40.0
+requests>=2.31.0

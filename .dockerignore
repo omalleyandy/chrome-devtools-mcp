@@ -1,0 +1,16 @@
+node_modules
+npm-debug.log
+Dockerfile*
+.dockerignore
+.git
+.gitignore
+.github
+.agent
+.claude-plugin
+.venv
+
+build/node_modules
+tests
+docs
+coverage
+
