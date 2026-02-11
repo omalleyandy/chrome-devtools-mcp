@@ -22,7 +22,7 @@ This document tracks production-worthiness of the **chrome-devtools-mcp** server
 
 | Check | Status | Notes |
 |-------|--------|-------|
-| Unit tests | [OK] | `uv run pytest tests/` - recording, replay, parse, output, api_normalize, utils |
+| Unit tests (116) | [OK] | `uv run pytest tests/` - 13 test files covering all modules + edge cases |
 | Replay smoke | [OK] | `run_tests.ps1` - replay-only from `data/cbb_recording.json` |
 | E2E (record) | [!!] Manual | Requires headed browser + live site; run setup/record-cbb skill |
 | CI | [OK] | `overtime-ag-tests.yml` on push/PR to plugin paths |
@@ -52,7 +52,7 @@ From repo root:
 .\scripts\test-production-readiness.ps1
 ```
 
-Use `-SkipE2E` to avoid E2E instructions (default). The script:
+Use `-SkipE2E` to skip E2E instructions. The script:
 
 1. Builds and runs Chrome DevTools MCP tests
 2. Runs overtime-ag pytest
@@ -60,6 +60,10 @@ Use `-SkipE2E` to avoid E2E instructions (default). The script:
 4. Prints manual E2E instructions
 
 ---
+
+## Recent Changes
+
+- **2026-02-11**: Fixed Windows crash on negative ASP.NET timestamps (`parse.py`). Added 116 tests across 13 files covering edge cases for all modules. Synced plugin copy with canonical `omalleyandy-plugins` repo. Added `Data.GameLines` nested extraction, `--replay-only` CLI flag, rotator/UA support, and login automation.
 
 ## Gaps / Future Work
 
