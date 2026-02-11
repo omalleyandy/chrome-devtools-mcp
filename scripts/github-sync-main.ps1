@@ -7,6 +7,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+# $ErrorActionPreference does not apply to external commands (e.g. git). We check $LASTEXITCODE after each git call in the -Sync block.
 $repoRoot = (Get-Item $PSScriptRoot).Parent.FullName
 Set-Location $repoRoot
 
@@ -30,8 +31,29 @@ $out += ""
 if ($Sync) {
     $out += "=== Syncing main ==="
     git switch main 2>&1 | ForEach-Object { $out += $_ }
+    if ($LASTEXITCODE -ne 0) {
+        $out += "ERROR: git switch main failed (exit $LASTEXITCODE). Sync aborted to avoid running pull/push on current branch."
+        $text = $out -join "`r`n"
+        $text | Out-File -FilePath $logPath -Encoding utf8
+        Write-Host $text
+        exit $LASTEXITCODE
+    }
     git pull origin main --rebase 2>&1 | ForEach-Object { $out += $_ }
+    if ($LASTEXITCODE -ne 0) {
+        $out += "ERROR: git pull failed (exit $LASTEXITCODE)."
+        $text = $out -join "`r`n"
+        $text | Out-File -FilePath $logPath -Encoding utf8
+        Write-Host $text
+        exit $LASTEXITCODE
+    }
     git push origin main 2>&1 | ForEach-Object { $out += $_ }
+    if ($LASTEXITCODE -ne 0) {
+        $out += "ERROR: git push failed (exit $LASTEXITCODE)."
+        $text = $out -join "`r`n"
+        $text | Out-File -FilePath $logPath -Encoding utf8
+        Write-Host $text
+        exit $LASTEXITCODE
+    }
     $out += "Done."
 } else {
     $out += "To sync main (pull + push), run: .\scripts\github-sync-main.ps1 -Sync"
@@ -39,4 +61,4 @@ if ($Sync) {
 
 $text = $out -join "`r`n"
 $text | Out-File -FilePath $logPath -Encoding utf8
-Write-Host $text
+Write-Host $text  
