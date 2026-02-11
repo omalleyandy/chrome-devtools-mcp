@@ -150,5 +150,8 @@ log.txt
 
 .DS_Store
 
+# Python virtual environment (overtime-ag-plugin)
+.venv/
+
 # Claude Code config
 .claude/
