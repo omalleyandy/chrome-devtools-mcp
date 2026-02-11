@@ -36,11 +36,11 @@ python overtime_ag_scraper.py --no-headless
 
 ### APIs used
 
-| Purpose        | Method | URL / Body |
-|----------------|--------|------------|
-| Session        | Playwright | `GET https://overtime.ag/sports#/` |
-| Sports list    | POST | `Offering.asmx/GetSports` → `{"getInactiveSports":false}` |
-| Game lines     | POST | `Offering.asmx/GetSportOffering` → `{"sportType":"Basketball","sportSubType":"NBA",...}` |
-| Event IDs      | GET  | `https://bv2-us.digitalsportstech.com/api/schedule?sb=ticosports-asi` |
+| Purpose     | Method     | URL / Body                                                                               |
+| ----------- | ---------- | ---------------------------------------------------------------------------------------- |
+| Session     | Playwright | `GET https://overtime.ag/sports#/`                                                       |
+| Sports list | POST       | `Offering.asmx/GetSports` → `{"getInactiveSports":false}`                                |
+| Game lines  | POST       | `Offering.asmx/GetSportOffering` → `{"sportType":"Basketball","sportSubType":"NBA",...}` |
+| Event IDs   | GET        | `https://bv2-us.digitalsportstech.com/api/schedule?sb=ticosports-asi`                    |
 
 Cookie handling (and optional `cf_clearance`) is done via the Playwright session; the same cookies are then used in the `requests` session.
